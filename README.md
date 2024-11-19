@@ -2,7 +2,7 @@
 
 This repository contains simple NodeJS/Express and React application which cam be used as basis for refreshtoken walkthrough.
 
-## Installationp instructions
+## Installation instructions
 
 In the project directory, you can run:
 
@@ -16,7 +16,7 @@ In the server directory, run again:
 
 This will retrieve all required node modules for Node/Express (backend).
 
-All configuration information is hardcoded and there is no need to create environment variables etc. Backend contains .rest file which uses REST Client for Visual Studio Code extension. File can be used to test out backend endpoints
+All configuration information is hardcoded and there is no need to create environment variables etc. Backend contains .rest file which uses [REST Client for Visual Studio Code extension] (https://marketplace.visualstudio.com/items?itemName=humao.rest-client). File can be used to test out backend endpoints
 
 To run application, start backend by running following command on server folder.
 
