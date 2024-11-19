@@ -1,0 +1,25 @@
+### Test if server is running
+GET http://localhost:3001
+
+### Login with valid credentials
+POST http://localhost:3001/signin HTTP/1.1
+Content-Type: application/json
+
+{ 
+  "email":"admin@foo.com",
+  "password":"adm123FOO?"
+}
+
+### Login with invalid credentials
+POST http://localhost:3001/signin HTTP/1.1
+Content-Type: application/json
+
+{ 
+  "email":"admin@foo.com",
+  "password":"wrong"
+}
+
+
+### Get secured content
+GET http://localhost:3001/secured HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZm9vLmNvbSIsImlhdCI6MTczMTkxNDgyMH0.kMdjhlnYTwXNNy5nHO84LbF2uEvCOuIm4FGOdtk4Y-4
