@@ -31,12 +31,13 @@ app.get('/',(req,res) => {
 app.post('/signin',(req,res) => {
   const { email, password } = req.body
   if (email === 'admin@foo.com' && password === 'adm123FOO?') {
-    const access_token = sign({user: email},jwt_secret)
+    const access_token = sign({user: email},jwt_secret,{expiresIn: '1m'})
     return res
+      .header('Access-Control-Expose-Headers','Authorization')
+      .header('Authorization','Bearer ' + access_token)
       .status(200)
       .json({
-        email: email,
-        access_token: access_token
+        email: email
       }
     )
   }

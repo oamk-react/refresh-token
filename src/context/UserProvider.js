@@ -15,13 +15,22 @@ export default function UserProvider({children}) {
     const headers = {headers: {'Content-Type':'application/json'}}
     try {
       const response = await axios.post(base_url + '/signin',json,headers)
-      setUser(response.data)
-      sessionStorage.setItem("user",JSON.stringify(response.data))
+      const token =readAuthorizationHeader(response)
+      const user = {email: response.data.email,access_token: token}
+      setUser(user)
+      sessionStorage.setItem("user",JSON.stringify(user))
     } catch(error) {
       setUser({email: '',password: ''})
       throw error
     }
   } 
+
+  const readAuthorizationHeader = (response) => {
+    if (response.headers.get('authorization') && 
+      response.headers.get('authorization').split(' ')[0] === 'Bearer') {
+      return response.headers.get('authorization').split(' ')[1]
+    }
+  }
 
   return (
     <UserContext.Provider value={{user, setUser,signIn}}>
