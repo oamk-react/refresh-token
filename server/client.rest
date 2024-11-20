@@ -19,7 +19,6 @@ Content-Type: application/json
   "password":"wrong"
 }
 
-
 ### Get secured content
 GET http://localhost:3001/secured HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZm9vLmNvbSIsImlhdCI6MTczMTkxNDgyMH0.kMdjhlnYTwXNNy5nHO84LbF2uEvCOuIm4FGOdtk4Y-4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZm9vLmNvbSIsImlhdCI6MTczMjA0MzgwNSwiZXhwIjoxNzMyMDQzODY1fQ.9TLzu4u19GWWR8oxHPg5wYrejgQfQFSbxW0VM1x2u2I

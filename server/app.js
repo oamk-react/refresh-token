@@ -12,8 +12,7 @@ app.use(cors())
 app.use(express.json())
 
 const auth = (req,res,next) => {
-  if (!req.headers.authorization) res.status(401).json({error: 'Unauthorized'})
-
+  if (!req.headers.authorization) return res.status(401).json({error: 'Unauthorized'})
   try { 
     const authHeader = req.headers.authorization
     const access_token = authHeader.split(" ")[1]
@@ -21,7 +20,7 @@ const auth = (req,res,next) => {
     verify(access_token,jwt_secret)
     next()
   } catch (error) { 
-    res.status(401).json({error: 'Unauthorized'})
+    return res.status(401).json({error: 'Unauthorized'})
   }    
 }
 

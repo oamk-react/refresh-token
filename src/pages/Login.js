@@ -13,34 +13,31 @@ export default function Login() {
       await signIn()
       navigate("/")
     } catch (error) {
-      console.log(error.response)
       const message = error.response && error.response.data ? error.response.data.error : error
       alert(message)
     } 
   }
 
   return (
-    <div id="login">
-      <form onSubmit={login}>
-        <h3>Login</h3>
-        <div>
-          <input 
-            placeholder='Type your email here...'
-            type="email"
-            value={ user.email }
-            onChange={e => setUser({...user,email: e.target.value})}
-          />
-        </div>
-        <div>
-          <input 
-            placeholder='Type your password here...'
-            type="password"
-            value={user.password}
-            onChange={e => setUser({...user,password: e.target.value})}
-          />
-        </div>
-        <button>Ok</button>
-      </form>
-    </div>
+    <form onSubmit={login}>
+      <h3>Login</h3>
+      <div>
+        <input 
+          placeholder='Type your email here...'
+          type="email"
+          value={ user.email }
+          onChange={e => setUser({...user,email: e.target.value})}
+        />
+      </div>
+      <div>
+        <input 
+          placeholder='Type your password here...'
+          type="password"
+          value={user.password}
+          onChange={e => setUser({...user,password: e.target.value})}
+        />
+      </div>
+      <button>Ok</button>
+    </form>
   )
 }

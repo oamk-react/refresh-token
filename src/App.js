@@ -10,12 +10,14 @@ function App() {
   return (
    <UserProvider>
     <Header />
-    <Routes>
-      <Route element={<PrivateRoute />}>
-        <Route path="/" element={<Home />}/>
-      </Route>
-      <Route path="/login" element={<Login />}/>
-    </Routes>
+    <div className='content'>
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />}/>
+        </Route>
+        <Route path="/login" element={<Login />}/>
+      </Routes>
+    </div>
    </UserProvider>
   );
 }
