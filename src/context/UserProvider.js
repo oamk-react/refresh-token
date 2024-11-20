@@ -14,16 +14,27 @@ export default function UserProvider({children}) {
     const json = JSON.stringify(user)
     const headers = {headers: {'Content-Type':'application/json'}}
     try {
+      axios.defaults.withCredentials = true
       const response = await axios.post(base_url + '/signin',json,headers)
       const token = readAuthorizationHeader(response)
       const user = {email: response.data.email,access_token: token}
       setUser(user)
       sessionStorage.setItem("user",JSON.stringify(user))
+      //console.log(listCookies()) // This can be used to test if client receives any cookies from the server.
     } catch(error) {
       setUser({email: '',password: ''})
       throw error
     }
-  } 
+  }
+  
+/*   function listCookies() {
+    var theCookies = document.cookie.split(';');
+    var aString = '';
+    for (var i = 1 ; i <= theCookies.length; i++) {
+        aString += i + ' ' + theCookies[i-1] + "\n";
+    }
+    return aString;
+  } */
 
   const updateToken = (response) => {
     const token = readAuthorizationHeader(response)

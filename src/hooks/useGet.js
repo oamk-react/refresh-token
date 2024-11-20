@@ -10,6 +10,7 @@ export function useGet() {
 
   useEffect(() => {
     const headers = {headers: {Authorization: 'Bearer ' + user.access_token}}
+    axios.defaults.withCredentials = true
     axios.get('http://localhost:3001/secured',headers)
       .then(response => {
         setData(response.data)
