@@ -11,13 +11,24 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+
+app.use((req,res,next) => {
+  res.authorizationHeader = (email) => {
+    const access_token = sign({user: email},jwt_secret,{expiresIn: '1m'})
+    return res.header('Access-Control-Expose-Headers','Authorization')
+              .header('Authorization','Bearer ' + access_token)
+  }
+  next()
+})
+
 const auth = (req,res,next) => {
   if (!req.headers.authorization) return res.status(401).json({error: 'Unauthorized'})
   try { 
     const authHeader = req.headers.authorization
     const access_token = authHeader.split(" ")[1]
 
-    verify(access_token,jwt_secret)
+    const decodedUser = verify(access_token,jwt_secret)
+    res.authorizationHeader(decodedUser.email)
     next()
   } catch (error) { 
     return res.status(401).json({error: 'Unauthorized'})
@@ -31,10 +42,8 @@ app.get('/',(req,res) => {
 app.post('/signin',(req,res) => {
   const { email, password } = req.body
   if (email === 'admin@foo.com' && password === 'adm123FOO?') {
-    const access_token = sign({user: email},jwt_secret,{expiresIn: '1m'})
     return res
-      .header('Access-Control-Expose-Headers','Authorization')
-      .header('Authorization','Bearer ' + access_token)
+      .authorizationHeader(email)
       .status(200)
       .json({
         email: email

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
-import { useUser } from '../context/useUser'
+import { useUser } from '../hooks/useUser'
 
 export default function PrivateRoute() {
     const { user } = useUser()
