@@ -19,6 +19,11 @@ Content-Type: application/json
   "password":"wrong"
 }
 
+
+### Autologin
+POST http://localhost:3001/autologin HTTP/1.1
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZm9vLmNvbSIsImlhdCI6MTczMjEwNDQ4MSwiZXhwIjoxNzMyMTA0NjAxfQ.a5sNe79pR3xKSAR0Oxl91xgVH-T4ffVjVgIxZg4HK_U
+
 ### Get secured content
 GET http://localhost:3001/secured HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW5AZm9vLmNvbSIsImlhdCI6MTczMjA0MzgwNSwiZXhwIjoxNzMyMDQzODY1fQ.9TLzu4u19GWWR8oxHPg5wYrejgQfQFSbxW0VM1x2u2I

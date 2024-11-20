@@ -83,6 +83,22 @@ app.post('/signin',(req,res) => {
   return res.status(401).json({error: 'Invalid credentials'}) 
 })
 
+app.post('/autologin',(req,res) => {
+  if (req.cookies['refreshToken']) {
+    try {
+      const refresh_token = req.cookies['refreshToken']
+      const decodedUser = verify(refresh_token,jwt_secret)
+      return res.exposeHeaders()
+                .authorizationHeader(decodedUser.email)
+                .status(200).json({message: 'Valid refreshtoken'})
+    } catch (error) {
+      return res.status(401).json({error: 'Unauthorized'})
+    }
+  } else {
+    return res.status(401).json({error: 'Unauthorized'})
+  }  
+})
+
 app.get('/secured',auth,(req,res) => {
   return res.status(200).json({message: 'This is secured content.'})
 })

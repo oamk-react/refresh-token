@@ -16,15 +16,28 @@ export default function UserProvider({children}) {
     try {
       axios.defaults.withCredentials = true
       const response = await axios.post(base_url + '/signin',json,headers)
-      const token = readAuthorizationHeader(response)
-      const user = {email: response.data.email,access_token: token}
-      setUser(user)
-      sessionStorage.setItem("user",JSON.stringify(user))
-      //console.log(listCookies()) // This can be used to test if client receives any cookies from the server.
+      saveUser(response)
     } catch(error) {
       setUser({email: '',password: ''})
       throw error
     }
+  }
+
+  const autoLogin = async () => {
+    try {
+      axios.defaults.withCredentials = true
+      const response = await axios.post(base_url + '/autologin')
+      saveUser(response)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const saveUser = (response) => {
+    const token = readAuthorizationHeader(response)
+      const user = {email: response.data.email,access_token: token}
+      setUser(user)
+      sessionStorage.setItem("user",JSON.stringify(user))
   }
   
 /*   function listCookies() {
@@ -51,7 +64,7 @@ export default function UserProvider({children}) {
   }
 
   return (
-    <UserContext.Provider value={{user, setUser,signIn,updateToken}}>
+    <UserContext.Provider value={{user, setUser,signIn,updateToken,autoLogin}}>
       { children }
     </UserContext.Provider>
   )
